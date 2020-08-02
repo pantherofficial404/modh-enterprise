@@ -1,0 +1,5 @@
+{
+  "PORT": 8080,
+  "DB_PATH": "mongodb://localhost/modh-enterprise",
+  "JWT_SECRET": "123"
+}

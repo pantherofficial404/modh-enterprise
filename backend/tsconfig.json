@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "module": "commonjs",
+    "target": "es2017",
+    "noImplicitAny": false,
+    "outDir": "./build",
+    "sourceMap": true,
+    "removeComments": true,
+    "rootDir": "./src",
+    "sourceRoot": "./src",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@app/types": [
+        "./types"
+      ],
+      "@app/models": [
+        "./models"
+      ],
+      "@app/helpers/*": [
+        "./helpers/*"
+      ],
+      "@app/services": [
+        "./services"
+      ],
+      "@app/middlewares": [
+        "./middlewares"
+      ],
+      "@app/constants": [
+        "./constants"
+      ],
+      "@app/api/*": [
+        "./api/*"
+      ]
+    },
+    "typeRoots": [
+      "node_modules/@types",
+      "./typings"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
