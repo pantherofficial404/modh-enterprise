@@ -4,7 +4,7 @@ import Koa from 'koa';
 // Project files
 import { STATUS_CODE } from '@app/constants';
 
-const notFoundHandler = async (ctx: Koa.Context, next: Koa.Next) => {
+const notFoundHandler = async (ctx: Koa.Context) => {
   if (ctx.path === '/alive') {
     ctx.body = {
       status: 'ok',

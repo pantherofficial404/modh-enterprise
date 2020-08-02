@@ -5,6 +5,7 @@ import Router from 'koa-router';
 // Project files
 import { IController } from '@app/types';
 import InfoController from './controllers/info.controller';
+import AuthController from './controllers/auth.controller';
 
 const publicRouter = new Router();
 const privateRouter = new Router();
@@ -35,10 +36,11 @@ const setControllerRoutes = (router: Router, controller: IController) => {
 };
 
 setControllerRoutes(publicRouter, InfoController);
+setControllerRoutes(publicRouter, AuthController);
 
 export default Compose([
   publicRouter.routes(),
   publicRouter.allowedMethods(),
   privateRouter.routes(),
   privateRouter.allowedMethods(),
-])
+]);

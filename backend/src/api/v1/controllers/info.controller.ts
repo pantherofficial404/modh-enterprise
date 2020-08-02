@@ -2,8 +2,8 @@
 import Koa from 'koa';
 
 // Project files
-import { IController, IControllerRoute } from '@app/types';
-import BaseController from './base.controller';
+import { IController } from '@app/types';
+import BaseController from '@app/api/v1/controllers/base.controller';
 
 class InfoController extends BaseController implements IController {
   constructor() {

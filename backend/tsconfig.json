@@ -11,6 +11,8 @@
     "sourceRoot": "./src",
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
     "paths": {
       "@app/types": [
         "./types"

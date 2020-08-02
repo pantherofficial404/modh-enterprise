@@ -14,4 +14,6 @@ export const STATUS_CODE = {
 
 export enum ERROR_CODE {
   INVALID_OBJECTID = 100,
+  INVALID_BODY = 101,
+  USER_ALREADY_EXISTS = 201,
 }
