@@ -15,7 +15,7 @@ const notFoundHandler = async (ctx: Koa.Context) => {
 
   ctx.status = STATUS_CODE['Not Found'];
   ctx.body = {
-    code: STATUS_CODE['Not Found'],
+    errorCode: STATUS_CODE['Not Found'],
     message: 'Requested path not found',
     path: ctx.path,
     success: false,

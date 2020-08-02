@@ -6,9 +6,12 @@ export const isValidPassword = (value: string) => /(?=.*[a-z])(?=.*[A-Z])(?=.*[0
 
 export const isIndianNumber = (value: string) => /^[0]?[789]\d{9}$/.test(value);
 
+export const isValidPincode = (value: string) => /^[1-9][0-9]{5}$/.test(value);
+
 export default {
   isEmpty,
   isEmail,
   isValidPassword,
   isIndianNumber,
+  isValidPincode,
 }

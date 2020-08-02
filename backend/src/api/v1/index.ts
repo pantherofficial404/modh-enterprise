@@ -4,11 +4,15 @@ import Router from 'koa-router';
 
 // Project files
 import { IController } from '@app/types';
-import InfoController from './controllers/info.controller';
-import AuthController from './controllers/auth.controller';
+import InfoController from '@app/api/v1/controllers/info.controller';
+import AuthController from '@app/api/v1/controllers/auth.controller';
+import UserController from '@app/api/v1/controllers/user.controller';
+import { AuthMiddleware } from '@app/middlewares';
 
 const publicRouter = new Router();
 const privateRouter = new Router();
+
+privateRouter.use(AuthMiddleware);
 
 const setControllerRoutes = (router: Router, controller: IController) => {
   controller.routes.forEach(x => {
@@ -22,6 +26,12 @@ const setControllerRoutes = (router: Router, controller: IController) => {
         break;
       case 'DELETE':
         routeRegisterHandler = router.delete;
+        break;
+      case 'PUT':
+        routeRegisterHandler = router.put;
+        break;
+      case 'PATCH':
+        routeRegisterHandler = router.patch;
         break;
     }
 
@@ -37,6 +47,7 @@ const setControllerRoutes = (router: Router, controller: IController) => {
 
 setControllerRoutes(publicRouter, InfoController);
 setControllerRoutes(publicRouter, AuthController);
+setControllerRoutes(privateRouter, UserController);
 
 export default Compose([
   publicRouter.routes(),

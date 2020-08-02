@@ -27,3 +27,19 @@ export interface IAddress {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IAddAddressBody {
+  name: string;
+  mobileNo: string;
+  alternateMobileNo?: string;
+  pincode: number;
+  address1: string;
+  address2?: string;
+  city: string;
+  state: string;
+  landmark?: string;
+}
+
+export interface IUpdateAddressBody extends IAddAddressBody {
+  uuid: string;
+}

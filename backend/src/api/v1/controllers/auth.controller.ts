@@ -81,7 +81,7 @@ class AuthController extends BaseController implements IController {
     }
 
     const token = JWT.sign(authInfo, JWT_SECRET, { expiresIn });
-    this.Ok(ctx, { token }, 'Signup success');
+    this.Ok(ctx, { token, user: { ...authInfo, addresses: [] } }, 'Signup success');
   }
   public handleLogin = async (ctx: Koa.Context) => {
     const body: ILoginBody = ctx.request.body;
@@ -116,7 +116,7 @@ class AuthController extends BaseController implements IController {
       expiresIn,
     }
     const token = JWT.sign(authInfo, JWT_SECRET, { expiresIn });
-    this.Ok(ctx, { token }, 'Login success');
+    this.Ok(ctx, { token, user: { ...authInfo, addresses: user.addresses } }, 'Login success');
   }
 }
 

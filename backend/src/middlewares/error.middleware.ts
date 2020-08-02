@@ -20,7 +20,7 @@ const errorMiddleware = async (ctx: Koa.Context, next: Koa.Next) => {
 
     ctx.status = status;
     ctx.body = {
-      code: status,
+      errorCode: status,
       message,
       path: ctx.path,
       success: false,
