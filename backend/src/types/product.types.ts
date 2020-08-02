@@ -21,6 +21,7 @@ export interface IProductVariant {
   isOutOfStock: boolean;
 }
 export interface IProductImage {
+  id: string;
   uuid: string;
   productId: string;
   src: string;

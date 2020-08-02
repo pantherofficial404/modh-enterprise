@@ -11,6 +11,7 @@ const ProductSchema = new Mongoose.Schema<IProduct>({
   description: { type: Mongoose.Schema.Types.String, required: true },
   category: { type: Mongoose.Schema.Types.String, required: true },
   image: {
+    id: { type: Mongoose.Schema.Types.String, required: true },
     uuid: { type: Mongoose.Schema.Types.String, required: true },
     productId: { type: Mongoose.Schema.Types.String, required: true },
     src: { type: Mongoose.Schema.Types.String, required: true },
@@ -18,6 +19,7 @@ const ProductSchema = new Mongoose.Schema<IProduct>({
     variantIds: [{ type: Mongoose.Schema.Types.String, required: false }],
   },
   images: [{
+    id: { type: Mongoose.Schema.Types.String, required: true },
     uuid: { type: Mongoose.Schema.Types.String, required: true },
     productId: { type: Mongoose.Schema.Types.String, required: true },
     src: { type: Mongoose.Schema.Types.String, required: true },
