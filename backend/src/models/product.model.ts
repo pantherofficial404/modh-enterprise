@@ -7,19 +7,12 @@ import { IProduct } from '@app/types';
 type IProductModel = IProduct & Mongoose.Document;
 
 const ProductSchema = new Mongoose.Schema<IProduct>({
+  productId: { type: Mongoose.Schema.Types.String, required: true },
   title: { type: Mongoose.Schema.Types.String, required: true },
   description: { type: Mongoose.Schema.Types.String, required: true },
   category: { type: Mongoose.Schema.Types.String, required: true },
-  image: {
-    id: { type: Mongoose.Schema.Types.String, required: true },
-    uuid: { type: Mongoose.Schema.Types.String, required: true },
-    productId: { type: Mongoose.Schema.Types.String, required: true },
-    src: { type: Mongoose.Schema.Types.String, required: true },
-    mediaType: { type: Mongoose.Schema.Types.String, default: 'IMAGE' },
-    variantIds: [{ type: Mongoose.Schema.Types.String, required: false }],
-  },
+  thumbnailImage: { type: Mongoose.Schema.Types.String, required: true },
   images: [{
-    id: { type: Mongoose.Schema.Types.String, required: true },
     uuid: { type: Mongoose.Schema.Types.String, required: true },
     productId: { type: Mongoose.Schema.Types.String, required: true },
     src: { type: Mongoose.Schema.Types.String, required: true },
@@ -40,7 +33,7 @@ const ProductSchema = new Mongoose.Schema<IProduct>({
   disabled: { type: Mongoose.Schema.Types.Boolean, default: false },
   vendor: { type: Mongoose.Schema.Types.String, required: true },
   originOfProduct: { type: Mongoose.Schema.Types.String, required: true },
-});
+}, { timestamps: true });
 
 const Product = Mongoose.model<IProductModel>('product', ProductSchema);
 export default Product;
