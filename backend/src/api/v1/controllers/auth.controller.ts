@@ -60,7 +60,7 @@ class AuthController extends BaseController implements IController {
     const expiresIn = Date.now() + (typeof process.env.JWT_EXPIRE === 'undefined' ? Config.get<number>('JWT_EXPIRE') : Number(process.env.JWT_EXPIRE));
     const JWT_SECRET = process.env.JWT_SECRET ?? Config.get('JWT_SECRET');
 
-    await User.create({
+    const user = await User.create({
       firstName: body.firstName,
       lastName: body.lastName,
       email: body.email,
@@ -78,6 +78,7 @@ class AuthController extends BaseController implements IController {
       roles: ['CUSTOMER'],
       isVerified: Boolean(body.isVerified),
       expiresIn,
+      _id: user._id,
     }
 
     const token = JWT.sign(authInfo, JWT_SECRET, { expiresIn });
@@ -114,6 +115,7 @@ class AuthController extends BaseController implements IController {
       roles: user.roles,
       isVerified: Boolean(user.isVerified),
       expiresIn,
+      _id: user._id,
     }
     const token = JWT.sign(authInfo, JWT_SECRET, { expiresIn });
     this.Ok(ctx, { token, user: { ...authInfo, addresses: user.addresses } }, 'Login success');

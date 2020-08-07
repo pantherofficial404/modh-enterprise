@@ -61,6 +61,9 @@ class UserController extends BaseController implements IController {
     if (!Validator.isValidPincode(String(body.pincode))) {
       formErrors.push('Pincode is invalid');
     }
+    if (!(body.type === 'HOME' || body.type === 'WORK')) {
+      formErrors.push('Address type should be either home or work');
+    }
 
     if (formErrors.length) {
       return this.BadRequest(ctx, 'Form is invalid', ERROR_CODE.INVALID_BODY, formErrors);
@@ -80,6 +83,7 @@ class UserController extends BaseController implements IController {
       landmark: body.landmark || '',
       createdAt: new Date(),
       updatedAt: new Date(),
+      type: body.type,
     }
 
     await User.updateOne({ email }, { $push: { addresses: address } });
@@ -131,6 +135,9 @@ class UserController extends BaseController implements IController {
     if (!Validator.isValidPincode(String(body.pincode))) {
       formErrors.push('Pincode is invalid');
     }
+    if (!(body.type === 'HOME' || body.type === 'WORK')) {
+      formErrors.push('Address type should be either home or work');
+    }
 
     if (formErrors.length) {
       return this.BadRequest(ctx, 'Form is invalid', ERROR_CODE.INVALID_BODY, formErrors);
@@ -157,6 +164,7 @@ class UserController extends BaseController implements IController {
       landmark: body.landmark || '',
       createdAt: addresses[matchedAddressIndex].createdAt,
       updatedAt: new Date(),
+      type: body.type,
     }
 
     addresses[matchedAddressIndex] = address;

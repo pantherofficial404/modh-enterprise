@@ -3,11 +3,11 @@ import Koa from 'koa';
 import { v4 as UuidV4 } from 'uuid';
 
 // Project files
-import { IController, IProductAddBody, IProductVariant, IProduct } from '@app/types';
+import { IController, IProductAddBody, IProductVariant, IProduct, IAddReviewBody, IReview } from '@app/types';
 import BaseController from '@app/api/v1/controllers/base.controller';
 import Validator from '@app/helpers/validator.helpers';
 import { ERROR_CODE } from '@app/constants';
-import { Product, Category } from '@app/models';
+import { Product, Category, Review } from '@app/models';
 
 class ProductController extends BaseController implements IController {
   constructor() {
@@ -27,6 +27,16 @@ class ProductController extends BaseController implements IController {
       method: 'GET',
       path: `${BASE_PATH}/category/:categoryName`,
       handler: this.getProductByCategory,
+    });
+    this.routes.push({
+      method: 'GET',
+      path: `${BASE_PATH}/review/:productId`,
+      handler: this.getReviews,
+    });
+    this.routes.push({
+      method: 'POST',
+      path: `${BASE_PATH}/review`,
+      handler: this.addReview,
     });
   }
 
@@ -155,6 +165,40 @@ class ProductController extends BaseController implements IController {
     }
     const products = await Product.find({ category: categoryName });
     this.Ok(ctx, { products }, 'Products fetched');
+  }
+
+  public getReviews = async (ctx: Koa.Context) => {
+    const productId = ctx.params.productId;
+    if (!Validator.isValidMongooseId(productId)) {
+      return this.BadRequest(ctx, 'Product is not valid', ERROR_CODE.INVALID_OBJECTID)
+    }
+
+    const reviews = await Review.find({ productId });
+    this.Ok(ctx, { reviews }, 'Reviews fetched');
+  }
+
+  public addReview = async (ctx: Koa.Context) => {
+    const body: IAddReviewBody = ctx.request.body;
+    const formErrors: string[] = [];
+    if (!Validator.isValidRating(String(body.rating))) {
+      formErrors.push('Rating should be between 1 to 5');
+    }
+    if (!Validator.isValidMongooseId(body.productId)) {
+      formErrors.push('Product is not valid');
+    }
+    if (formErrors.length) {
+      return this.BadRequest(ctx, 'Form is invalid', ERROR_CODE.INVALID_BODY, formErrors);
+    }
+
+    const ratingBody: IReview = {
+      ownerId: ctx.request.auth._id,
+      productId: body.productId,
+      rating: body.rating,
+      description: body.description || '',
+    }
+
+    const rating = await Review.create(ratingBody);
+    this.Ok(ctx, { rating }, 'Rating added');
   }
 }
 
