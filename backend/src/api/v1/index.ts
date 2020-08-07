@@ -9,6 +9,7 @@ import AuthController from '@app/api/v1/controllers/auth.controller';
 import UserController from '@app/api/v1/controllers/user.controller';
 import ProductController from '@app/api/v1/controllers/product.controller';
 import CategoryController from '@app/api/v1/controllers/category.controller';
+import OrderController from '@app/api/v1/controllers/order.controller';
 import { AuthMiddleware } from '@app/middlewares';
 
 const publicRouter = new Router();
@@ -52,6 +53,7 @@ setControllerRoutes(publicRouter, AuthController);
 setControllerRoutes(privateRouter, UserController);
 setControllerRoutes(privateRouter, ProductController);
 setControllerRoutes(privateRouter, CategoryController);
+setControllerRoutes(privateRouter, OrderController);
 
 export default Compose([
   publicRouter.routes(),

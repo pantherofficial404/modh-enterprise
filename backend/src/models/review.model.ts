@@ -10,7 +10,7 @@ const ReviewSchema = new Mongoose.Schema<IReview>({
   rating: { type: Mongoose.Schema.Types.Number, required: true },
   productId: { type: Mongoose.Schema.Types.ObjectId, required: true },
   description: { type: Mongoose.Schema.Types.String, required: false },
-  ownerId: { type: Mongoose.Schema.Types.ObjectId, required: true },
+  ownerId: { type: Mongoose.Schema.Types.ObjectId, required: true, ref: 'user' },
 }, { timestamps: true });
 
 const Review = Mongoose.model<IReviewModel>('review', ReviewSchema);

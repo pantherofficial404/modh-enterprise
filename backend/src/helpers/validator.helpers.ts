@@ -13,6 +13,8 @@ export const isValidRating = (value: string) => /\b[0-5]{1}\b/.test(value);
 
 export const isValidMongooseId = (value: string) => Types.ObjectId.isValid(value);
 
+export const isValidQuantity = (value: string) => value && /^\d*$/.test(value);
+
 export default {
   isEmpty,
   isEmail,
@@ -21,4 +23,5 @@ export default {
   isValidPincode,
   isValidRating,
   isValidMongooseId,
+  isValidQuantity,
 }

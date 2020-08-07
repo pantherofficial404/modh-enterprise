@@ -8,6 +8,7 @@ import BaseController from '@app/api/v1/controllers/base.controller';
 import Validator from '@app/helpers/validator.helpers';
 import { ERROR_CODE } from '@app/constants';
 import { User } from '@app/models';
+import CommonHelper from '@app/helpers/common.helpers';
 
 class UserController extends BaseController implements IController {
   constructor() {
@@ -40,30 +41,8 @@ class UserController extends BaseController implements IController {
     const body: IAddAddressBody = ctx.request.body;
 
     const formErrors = [];
-    if (Validator.isEmpty(body.address1)) {
-      formErrors.push('Address1 is required');
-    }
-    if (Validator.isEmpty(body.city)) {
-      formErrors.push('City is required');
-    }
-    if (Validator.isEmpty(body.name)) {
-      formErrors.push('Name is required');
-    }
-    if (Validator.isEmpty(body.state)) {
-      formErrors.push('State is required');
-    }
-    if (!Validator.isIndianNumber(body.mobileNo)) {
-      formErrors.push('Mobile no is invalid');
-    }
-    if (body.alternateMobileNo && !Validator.isIndianNumber(body.alternateMobileNo)) {
-      formErrors.push('Alternate mobile no is invalid');
-    }
-    if (!Validator.isValidPincode(String(body.pincode))) {
-      formErrors.push('Pincode is invalid');
-    }
-    if (!(body.type === 'HOME' || body.type === 'WORK')) {
-      formErrors.push('Address type should be either home or work');
-    }
+
+    Array.prototype.push.apply(formErrors, CommonHelper.validateAddress(body));
 
     if (formErrors.length) {
       return this.BadRequest(ctx, 'Form is invalid', ERROR_CODE.INVALID_BODY, formErrors);
@@ -114,30 +93,7 @@ class UserController extends BaseController implements IController {
     if (Validator.isEmpty(body.uuid)) {
       formErrors.push('Id is required');
     }
-    if (Validator.isEmpty(body.address1)) {
-      formErrors.push('Address1 is required');
-    }
-    if (Validator.isEmpty(body.city)) {
-      formErrors.push('City is required');
-    }
-    if (Validator.isEmpty(body.name)) {
-      formErrors.push('Name is required');
-    }
-    if (Validator.isEmpty(body.state)) {
-      formErrors.push('State is required');
-    }
-    if (!Validator.isIndianNumber(body.mobileNo)) {
-      formErrors.push('Mobile no is invalid');
-    }
-    if (body.alternateMobileNo && !Validator.isIndianNumber(body.alternateMobileNo)) {
-      formErrors.push('Alternate mobile no is invalid');
-    }
-    if (!Validator.isValidPincode(String(body.pincode))) {
-      formErrors.push('Pincode is invalid');
-    }
-    if (!(body.type === 'HOME' || body.type === 'WORK')) {
-      formErrors.push('Address type should be either home or work');
-    }
+    Array.prototype.push.apply(formErrors, CommonHelper.validateAddress(body));
 
     if (formErrors.length) {
       return this.BadRequest(ctx, 'Form is invalid', ERROR_CODE.INVALID_BODY, formErrors);
