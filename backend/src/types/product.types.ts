@@ -1,8 +1,9 @@
 export interface IProduct {
+  productId: string;
   title: string;
   description: string;
   category: IProductCategory;
-  image: IProductImage;
+  thumbnailImage: string;
   images: IProductImage[];
   variants: IProductVariant[];
   disabled: boolean;
@@ -21,7 +22,6 @@ export interface IProductVariant {
   isOutOfStock: boolean;
 }
 export interface IProductImage {
-  id: string;
   uuid: string;
   productId: string;
   src: string;
@@ -30,5 +30,27 @@ export interface IProductImage {
 }
 export type IProductMediaType = 'IMAGE' | 'VIDEO';
 export type IProductCategory = 'PULSES' | 'HEALTH & BEAUTY' | 'FLOUR' | 'CLEANING & HOUSEHOLD' | 'SNACK & BEVERAGES' | 'NOODLES & SOUCES' | 'RICE' | 'DRYFRUITES' | 'SUGAR & SALT' | 'SPICES' | 'TEA & COFFEE' | 'GHEE & OIL' | 'SPECIAL';
-export type IProductWeightUnit = 'KG' | 'LITRE';
+export type IProductWeightUnit = 'KG' | 'LITRE' | 'GRAM' | 'UNIT';
 export type IProductOrigin = 'MADE IN INDIA' | 'MAKE IN INDIA' | 'MADE IN CHINA';
+
+
+export interface IProductAddBody {
+  productTitle: string;
+  description: string;
+  category: IProductCategory;
+  variants: {
+    title: string;
+    barcode: string;
+    originalPrice: number;
+    listingPrice: number;
+    weight: number;
+    weightUnit: IProductWeightUnit;
+    images: {
+      src: string;
+      mediaType: IProductMediaType;
+    }[];
+  }[];
+  vendor: string;
+  originOfProduct: IProductOrigin;
+  thumbnailImage: string;
+}
