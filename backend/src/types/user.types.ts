@@ -11,6 +11,7 @@ export interface IUser {
   addresses?: IAddress[];
   isVerified: boolean;
   forgotPasswordToken?: string;
+  favouritesProducts: { [id: string]: boolean };
 }
 
 export type IAddressType = 'HOME' | 'WORK';

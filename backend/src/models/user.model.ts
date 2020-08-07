@@ -17,6 +17,7 @@ const UserSchema = new Mongoose.Schema<IUser>({
   addresses: [{ type: Mongoose.Schema.Types.Mixed, required: false }],
   isVerified: { type: Mongoose.Schema.Types.Boolean, default: false },
   forgotPasswordToken: { type: Mongoose.Schema.Types.String, required: false },
+  favouritesProducts: { type: Mongoose.Schema.Types.Mixed, default: {} },
 }, { timestamps: true });
 
 const User = Mongoose.model<IUserModel>('user', UserSchema);

@@ -68,6 +68,7 @@ class AuthController extends BaseController implements IController {
       password: passwordHash,
       roles: ['CUSTOMER'],
       isVerified: Boolean(body.isVerified),
+      favouritesProducts: {},
     });
 
     const authInfo = {
