@@ -1,6 +1,6 @@
 {
   "PORT": 8080,
-  "DB_PATH": "mongodb://localhost/modh-enterprise",
+  "DB_PATH": "mongodb://admin:admin9974@ds026018.mlab.com:26018/graphql-local",
   "JWT_SECRET": "123",
   "JWT_EXPIRE":3600000
 }
