@@ -9,6 +9,7 @@ interface IAuth {
   roles: IUserRole[];
   isVerified: boolean;
   expiresIn: number;
+  _id: string;
 }
 
 declare module "koa" {

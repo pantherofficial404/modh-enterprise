@@ -13,6 +13,8 @@ export interface IUser {
   forgotPasswordToken?: string;
 }
 
+export type IAddressType = 'HOME' | 'WORK';
+
 export interface IAddress {
   uuid: string;
   name: string;
@@ -26,6 +28,7 @@ export interface IAddress {
   landmark?: string;
   createdAt: Date;
   updatedAt: Date;
+  type: IAddressType;
 }
 
 export interface IAddAddressBody {
@@ -38,6 +41,7 @@ export interface IAddAddressBody {
   city: string;
   state: string;
   landmark?: string;
+  type: IAddressType;
 }
 
 export interface IUpdateAddressBody extends IAddAddressBody {
